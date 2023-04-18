@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">SuperheroApp</string>
+    <string name="modo_oscuro">Modo Oscuro</string>
+    <string name="activa_el_modo_escuro_para_un_cambio_visual">Activa el modo escuro para un cambio visual</string>
+    <string name="activar_bluetooth">Activar Bluetooth</string>
+    <string name="conecta_perif_ricos_sin_cables">Conecta periféricos sin cables</string>
+    <string name="vibrar_en_las_llamadas">Vibrar en las llamadas</string>
+    <string name="volumen">Volumen</string>
 </resources>
