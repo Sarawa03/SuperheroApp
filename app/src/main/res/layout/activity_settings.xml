@@ -28,7 +28,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/modo_oscuro"
-                android:textColor="@color/black" />
+                android:textColor="@color/settings_text_title" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -67,7 +67,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/activar_bluetooth"
-                android:textColor="@color/black" />
+                android:textColor="@color/settings_text_title" />
 
             <TextView
                 android:layout_width="wrap_content"
@@ -112,7 +112,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/volumen"
-                android:textColor="@color/black" />
+                android:textColor="@color/settings_text_title" />
 
             <com.google.android.material.slider.RangeSlider
                 android:id="@+id/rsVolume"
@@ -143,7 +143,7 @@
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="@string/vibrar_en_las_llamadas"
-            android:textColor="@color/black" />
+            android:textColor="@color/settings_text_title" />
 
 
         <com.google.android.material.switchmaterial.SwitchMaterial
