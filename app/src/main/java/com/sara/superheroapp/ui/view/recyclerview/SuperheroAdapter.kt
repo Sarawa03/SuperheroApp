@@ -12,8 +12,10 @@ class SuperheroAdapter(
 ) :
     RecyclerView.Adapter<SuperheroViewHolder>() {
 
-    fun updateList(superheroList: List<SuperheroItemResponse>) {
-        this.superheroList = superheroList
+    fun updateList(superheroList: List<SuperheroItemResponse>?) {
+        if (superheroList != null) {
+            this.superheroList = superheroList
+        }
         notifyDataSetChanged()
     }
 
