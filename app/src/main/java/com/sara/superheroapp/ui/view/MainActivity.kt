@@ -35,6 +35,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUi() {
+
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener
         {
             override fun onQueryTextSubmit(query: String?): Boolean {//Cuando pulsamos en buscar, la lupa
@@ -44,6 +45,9 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onQueryTextChange(newText: String?): Boolean {//Se llama a medida que vamos escribiendo
+
+                searchByName(newText.orEmpty())
+
                 return false
             }
         }
@@ -56,9 +60,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun searchByName(query: String) {
-        binding.progressBar.isVisible = true
 
+        binding.progressBar.isVisible = true
         CoroutineScope(Dispatchers.IO).launch {
+
             val myResponse: Response<SuperheroDataResponse> = retrofit.create(ApiService::class.java).getSuperheroes(query)
             if(myResponse.isSuccessful) {
                 val response: SuperheroDataResponse? = myResponse.body()
