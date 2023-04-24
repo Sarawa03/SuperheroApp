@@ -5,8 +5,9 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sara.superheroapp.R
 import com.sara.superheroapp.domain.model.SuperheroItem
+import javax.inject.Inject
 
-class SuperheroAdapter(
+class SuperheroAdapter @Inject constructor(
     var superheroList: List<SuperheroItem> = emptyList(),
     private val onItemSelected: (String) -> Unit
 ) :

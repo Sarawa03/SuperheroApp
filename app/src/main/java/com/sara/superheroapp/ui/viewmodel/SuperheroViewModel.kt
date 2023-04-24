@@ -16,7 +16,7 @@ class SuperheroViewModel @Inject constructor(
 
 ): ViewModel() {
 
-    val superHeroModel = MutableLiveData<List<SuperheroItem>>()
+    val superHeroModel = MutableLiveData<List<SuperheroItem>>() //No se puede acceder(?)
     val isLoading = MutableLiveData<Boolean>()
 
     fun searchSuperheroByName(query: String){
