@@ -1,7 +1,8 @@
-package com.sara.superheroapp
+package com.sara.superheroapp.ui.view.recyclerview
 
 import android.view.View
 import androidx.recyclerview.widget.RecyclerView
+import com.sara.superheroapp.data.model.SuperheroItemResponse
 import com.sara.superheroapp.databinding.ItemSuperheroBinding
 import com.squareup.picasso.Picasso
 

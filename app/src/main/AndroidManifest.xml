@@ -18,10 +18,10 @@
             android:name="com.sara.settings.SettingsActivity"
             android:exported="false" />
         <activity
-            android:name=".DetailSuperheroActivity"
+            android:name=".ui.view.DetailSuperheroActivity"
             android:exported="false" />
         <activity
-            android:name=".MainActivity"
+            android:name=".ui.view.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

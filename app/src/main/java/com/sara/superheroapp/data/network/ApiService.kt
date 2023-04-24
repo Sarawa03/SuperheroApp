@@ -1,5 +1,7 @@
-package com.sara.superheroapp
+package com.sara.superheroapp.data.network
 
+import com.sara.superheroapp.data.model.SuperHeroDetailResponse
+import com.sara.superheroapp.data.model.SuperheroDataResponse
 import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path

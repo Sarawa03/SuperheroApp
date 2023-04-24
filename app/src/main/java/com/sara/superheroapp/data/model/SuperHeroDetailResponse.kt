@@ -1,4 +1,4 @@
-package com.sara.superheroapp
+package com.sara.superheroapp.data.model
 
 import com.google.gson.annotations.SerializedName
 
@@ -6,7 +6,7 @@ data class SuperHeroDetailResponse(
     @SerializedName("name") val name: String,
     @SerializedName("powerstats") val powerstats : PowerStatsResponse,
     @SerializedName("image") val image : SuperheroImageDetailResponse,
-    @SerializedName("biography") val biography:Biography
+    @SerializedName("biography") val biography: Biography
     //@SerializedName("") val :
 )
 

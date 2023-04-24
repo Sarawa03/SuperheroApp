@@ -1,8 +1,10 @@
-package com.sara.superheroapp
+package com.sara.superheroapp.ui.view.recyclerview
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.sara.superheroapp.R
+import com.sara.superheroapp.data.model.SuperheroItemResponse
 
 class SuperheroAdapter(
     var superheroList: List<SuperheroItemResponse> = emptyList(),

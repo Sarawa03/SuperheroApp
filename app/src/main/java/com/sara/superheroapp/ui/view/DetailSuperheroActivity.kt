@@ -1,9 +1,12 @@
-package com.sara.superheroapp
+package com.sara.superheroapp.ui.view
 
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
+import com.sara.superheroapp.data.network.ApiService
+import com.sara.superheroapp.data.model.PowerStatsResponse
+import com.sara.superheroapp.data.model.SuperHeroDetailResponse
 import com.sara.superheroapp.databinding.ActivityDetailSuperheroBinding
 import com.squareup.picasso.Picasso
 import kotlinx.coroutines.CoroutineScope

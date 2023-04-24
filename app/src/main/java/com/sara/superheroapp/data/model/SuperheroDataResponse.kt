@@ -1,4 +1,4 @@
-package com.sara.superheroapp
+package com.sara.superheroapp.data.model
 
 import com.google.gson.annotations.SerializedName
 

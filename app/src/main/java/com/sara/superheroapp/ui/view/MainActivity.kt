@@ -1,4 +1,4 @@
-package com.sara.superheroapp
+package com.sara.superheroapp.ui.view
 
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
@@ -7,8 +7,12 @@ import android.util.Log
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.sara.superheroapp.DetailSuperheroActivity.Companion.EXTRA_ID
+import com.sara.superheroapp.data.model.SuperheroDataResponse
+import com.sara.superheroapp.data.network.ApiService
+
+import com.sara.superheroapp.ui.view.DetailSuperheroActivity.Companion.EXTRA_ID
 import com.sara.superheroapp.databinding.ActivityMainBinding
+import com.sara.superheroapp.ui.view.recyclerview.SuperheroAdapter
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
