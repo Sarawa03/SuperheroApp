@@ -25,7 +25,6 @@ class DetailSuperheroActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailSuperheroBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        setContentView(R.layout.activity_detail_superhero)
         val id: String = intent.getStringExtra(EXTRA_ID).orEmpty()
 
         getSuperheroInformation(id)
