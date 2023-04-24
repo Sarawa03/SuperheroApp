@@ -4,18 +4,17 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.sara.superheroapp.R
-import com.sara.superheroapp.data.model.SuperheroItemResponse
+import com.sara.superheroapp.domain.model.SuperheroItem
 
 class SuperheroAdapter(
-    var superheroList: List<SuperheroItemResponse> = emptyList(),
+    var superheroList: List<SuperheroItem> = emptyList(),
     private val onItemSelected: (String) -> Unit
 ) :
     RecyclerView.Adapter<SuperheroViewHolder>() {
 
-    fun updateList(superheroList: List<SuperheroItemResponse>?) {
-        if (superheroList != null) {
-            this.superheroList = superheroList
-        }
+    fun updateList(superheroList: List<SuperheroItem>) {
+        this.superheroList = superheroList
+
         notifyDataSetChanged()
     }
 
