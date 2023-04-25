@@ -10,6 +10,7 @@ import com.sara.superheroapp.domain.GetAllFavs
 import com.sara.superheroapp.domain.GetByNameUseCase
 import com.sara.superheroapp.domain.RemoveFavSuperhero
 import com.sara.superheroapp.domain.model.SuperheroItem
+import com.sara.superheroapp.ui.view.recyclerview.SuperheroViewHolder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
 import javax.inject.Inject
@@ -22,38 +23,30 @@ class FavoritesViewModel @Inject constructor(
     private val getAllFavs: GetAllFavs
 ): ViewModel(){
 
-    val superHeroModel = MutableLiveData<List<SuperheroItem>>()
+    val favoritesViewModel = MutableLiveData<List<SuperheroItem>>()
 
     fun showFavs() {
         viewModelScope.launch {
             val result = getAllFavs()
-            superHeroModel.postValue(result)
+
+            favoritesViewModel.postValue(result)
             Log.i("PATATA", result.toString())
-
-        }
-    }
-    fun searchSuperheroByName(query: String){
-        viewModelScope.launch {
-
-            val result = getByNameUseCase(query)
-            if(result.response == "error"){
-                superHeroModel.postValue(emptyList())
-            }else{
-                superHeroModel.postValue(result.superheroes!!)
-            }
-
+            SuperheroViewHolder.favorites.clear()
+            result.forEach {SuperheroViewHolder.favorites.add(it.id) }
         }
     }
 
     fun addFavHero(superheroItem:SuperheroItem){
         viewModelScope.launch {
             addFavSuperhero(superheroItem.toEntityId())
+            SuperheroViewHolder.favorites.add(superheroItem.id)
         }
     }
 
     fun unfavHero(superheroItem: String){
         viewModelScope.launch {
             removeFavSuperhero(superheroItem)
+            SuperheroViewHolder.favorites.remove(superheroItem)
         }
     }
 

@@ -12,6 +12,9 @@ import com.sara.superheroapp.domain.GetByNameUseCase
 import com.sara.superheroapp.domain.RemoveFavSuperhero
 import com.sara.superheroapp.domain.model.Superhero
 import com.sara.superheroapp.domain.model.SuperheroItem
+import com.sara.superheroapp.ui.view.recyclerview.FavSuperheroAdapter
+import com.sara.superheroapp.ui.view.recyclerview.FavSuperheroViewHolder
+import com.sara.superheroapp.ui.view.recyclerview.SuperheroViewHolder
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -23,13 +26,21 @@ class SuperheroViewModel @Inject constructor(
     private val getByNameUseCase: GetByNameUseCase,
     private val addFavSuperhero: AddFavSuperhero,
     private val removeFavSuperhero: RemoveFavSuperhero,
-    private val favHeroDao: FavHeroDao
-//    private val getAllFavs: GetAllFavs
+    private val getAllFavs: GetAllFavs
+
 ): ViewModel() {
 
     val superHeroModel = MutableLiveData<List<SuperheroItem>>()
     val isLoading = MutableLiveData<Boolean>()
 
+    fun onCreate(){
+        viewModelScope.launch {
+            val result = getAllFavs()
+
+            SuperheroViewHolder.favorites.clear()
+            result.forEach {SuperheroViewHolder.favorites.add(it.id) }
+        }
+    }
     fun searchSuperheroByName(query: String){
         CoroutineScope(Dispatchers.IO).launch {
             //TODO - Comprobación de fav
@@ -43,17 +54,20 @@ class SuperheroViewModel @Inject constructor(
         }
     }
 
+
     fun addFavHero(superheroItem:SuperheroItem){
         CoroutineScope(Dispatchers.IO).launch {
-            Log.i("PATATA", superheroItem.toEntityId().toString())
+            //Log.i("PATATA", superheroItem.toEntityId().toString())
             addFavSuperhero(superheroItem.toEntityId())
-            Log.i("PATATA", favHeroDao.getAllFavSuperheroes().toString())
+            SuperheroViewHolder.favorites.add(superheroItem.id)
+            //Log.i("PATATA", favHeroDao.getAllFavSuperheroes().toString())
         }
     }
 
     fun unfavHero(superheroItem: String){
         CoroutineScope(Dispatchers.IO).launch {
             removeFavSuperhero(superheroItem)
+            SuperheroViewHolder.favorites.remove(superheroItem)
         }
     }
 

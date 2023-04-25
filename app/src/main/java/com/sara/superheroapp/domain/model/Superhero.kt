@@ -6,14 +6,14 @@ import com.sara.superheroapp.data.model.SuperheroIdDataResponse
 
 data class Superhero(
     val response: String,
-    val superheroes: List<SuperheroItem>?
+    val superheroes: List<SuperheroItem>?,
 )
 
 data class SuperheroItem(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
     @SerializedName("image") val image: SuperheroImage,
-    var isFav: Boolean = false
+    //var isFav: Boolean//=false
 )
 
 data class SuperheroImage(
@@ -21,4 +21,4 @@ data class SuperheroImage(
 )
 
 fun SuperheroDataResponse.toDomain() = Superhero(response, superheroes)
-fun SuperheroIdDataResponse.toDomain() = SuperheroItem(id=id, name=name, image=image, true)
+fun SuperheroIdDataResponse.toDomain() = SuperheroItem(id=id, name=name, image=image)

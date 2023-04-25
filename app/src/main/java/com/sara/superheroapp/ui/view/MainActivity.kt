@@ -1,6 +1,7 @@
 package com.sara.superheroapp.ui.view
 
 import android.content.Intent
+import android.media.MediaPlayer
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -30,7 +31,7 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-
+        superheroViewModel.onCreate()
         initUi()
 
         superheroViewModel.superHeroModel.observe(this, Observer {
@@ -42,6 +43,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun initUi() {
+
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -68,6 +70,13 @@ class MainActivity : AppCompatActivity() {
         binding.rvSuperhero.setHasFixedSize(true)//TODO
         binding.rvSuperhero.layoutManager = LinearLayoutManager(this)//TODO
         binding.rvSuperhero.adapter = adapter
+    }
+
+    override fun onResume(){
+        super.onResume()
+        binding.progressBar.isVisible = true
+        superheroViewModel.searchSuperheroByName(binding.searchView.query.toString())
+        binding.progressBar.isVisible = false
     }
 
 
