@@ -30,10 +30,18 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                tools:text="Holitaaaaa"
+                tools:text="MyHero"
                 android:textSize="20sp"
                 android:textColor="@color/white"/>
         </FrameLayout>
+
+        <ImageView
+            android:id="@+id/favIcon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:src="@drawable/ic_favorite_disabled"
+            android:layout_gravity="end"/>
 
     </FrameLayout>
 

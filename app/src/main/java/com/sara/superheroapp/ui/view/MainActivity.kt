@@ -13,11 +13,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 
 import com.sara.superheroapp.ui.view.DetailSuperheroActivity.Companion.EXTRA_ID
 import com.sara.superheroapp.databinding.ActivityMainBinding
+import com.sara.superheroapp.domain.model.SuperheroItem
 import com.sara.superheroapp.ui.view.recyclerview.SuperheroAdapter
 import com.sara.superheroapp.ui.viewmodel.SuperheroViewModel
 import dagger.hilt.android.AndroidEntryPoint
 
-//@AndroidEntryPoint //TODO no salen los logs, cierra app sin mas
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
     private val superheroViewModel: SuperheroViewModel by viewModels()
@@ -30,21 +31,19 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
         initUi()
 
+        superheroViewModel.superHeroModel.observe(this, Observer {
 
-        Log.i("HELLO WORLD", superheroViewModel.toString())
-
-
-        superheroViewModel.superHeroModel.observe(this, Observer {//TODO error aqui <--
-            Log.i("HELLO WORLD", it.toString())
             adapter.updateList(it)
             binding.progressBar.isVisible = false
         })
+
     }
 
     private fun initUi() {
+
+        //binding.rvSuperhero.favIcon
 
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
@@ -59,9 +58,8 @@ class MainActivity : AppCompatActivity() {
                 superheroViewModel.searchSuperheroByName(query.orEmpty())
                 return false
             }
-        }
-        )
-        adapter = SuperheroAdapter { navigateToDetail(it) }
+        })
+        adapter = SuperheroAdapter (onItemSelected = {navigateToDetail(it)}, addFavHero = {addFavToDatabase(it)}, unfavHero = {unfavHero(it)})
         binding.rvSuperhero.setHasFixedSize(true)
         binding.rvSuperhero.layoutManager = LinearLayoutManager(this)
         binding.rvSuperhero.adapter = adapter
@@ -69,9 +67,18 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun navigateToDetail(id: String) {
+        Log.i("HELLO WORLD", id.toString())
         val intent = Intent(this, DetailSuperheroActivity::class.java)
         intent.putExtra(EXTRA_ID, id)
         startActivity(intent)
 
+    }
+
+    private fun addFavToDatabase(superheroItem: SuperheroItem){
+        superheroViewModel.addFavHero(superheroItem)
+    }
+
+    private fun unfavHero(superheroItem: String){
+        superheroViewModel.unfavHero(superheroItem)
     }
 }

@@ -9,7 +9,9 @@ import javax.inject.Inject
 
 class SuperheroAdapter @Inject constructor(
     var superheroList: List<SuperheroItem> = emptyList(),
-    private val onItemSelected: (String) -> Unit
+    private val onItemSelected: (String) -> Unit,
+    private val addFavHero: (SuperheroItem) -> Unit,
+    private val unfavHero: (String) -> Unit
 ) :
     RecyclerView.Adapter<SuperheroViewHolder>() {
 
@@ -32,7 +34,7 @@ class SuperheroAdapter @Inject constructor(
 
     override fun onBindViewHolder(viewHolder: SuperheroViewHolder, position: Int) {
 
-        viewHolder.bind(superheroList[position], onItemSelected)
+        viewHolder.bind(superheroList[position], onItemSelected, addFavHero, unfavHero)
     }
 
 }

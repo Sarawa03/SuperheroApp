@@ -11,7 +11,8 @@ data class Superhero(
 data class SuperheroItem(
     @SerializedName("id") val id: String,
     @SerializedName("name") val name: String,
-    @SerializedName("image") val image: SuperheroImage
+    @SerializedName("image") val image: SuperheroImage,
+    var isFav: Boolean = false
 )
 
 data class SuperheroImage(

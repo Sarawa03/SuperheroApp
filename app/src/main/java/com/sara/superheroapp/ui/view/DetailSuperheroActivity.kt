@@ -3,19 +3,19 @@ package com.sara.superheroapp.ui.view
 import android.os.Bundle
 import android.util.TypedValue
 import android.view.View
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import com.sara.superheroapp.data.network.ApiService
-import com.sara.superheroapp.data.model.PowerStatsResponse
-import com.sara.superheroapp.data.model.SuperHeroDetailResponse
+import androidx.lifecycle.Observer
 import com.sara.superheroapp.databinding.ActivityDetailSuperheroBinding
+import com.sara.superheroapp.domain.model.PowerStatsResponse
+import com.sara.superheroapp.domain.model.SuperheroDetails
+import com.sara.superheroapp.ui.viewmodel.SuperheroDetailsViewModel
 import com.squareup.picasso.Picasso
-import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.launch
+import dagger.hilt.android.AndroidEntryPoint
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import kotlin.math.roundToInt
-
+@AndroidEntryPoint //cannot instance error
 class DetailSuperheroActivity : AppCompatActivity() {
 
     companion object {
@@ -23,33 +23,22 @@ class DetailSuperheroActivity : AppCompatActivity() {
     }
 
     private lateinit var  binding: ActivityDetailSuperheroBinding
+    private val superheroDetailsViewModel: SuperheroDetailsViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityDetailSuperheroBinding.inflate(layoutInflater)
         setContentView(binding.root)
         val id: String = intent.getStringExtra(EXTRA_ID).orEmpty()
+        superheroDetailsViewModel.postSuperheroDetails(id)
 
-        getSuperheroInformation(id)
+        superheroDetailsViewModel.superHeroDetailsModel.observe(this, Observer {
+            createUI(it)
+        })
+
     }
 
-    private fun getSuperheroInformation(id: String) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val superheroDetail =
-                getRetrofit().create(ApiService::class.java).getSuperheroesDetail(id)
-
-            if(superheroDetail.body() != null){
-                runOnUiThread {
-                    createUI(superheroDetail.body()!!)
-                }
-
-            }
-
-
-        }
-    }
-
-    private fun createUI(superhero: SuperHeroDetailResponse) {
+    private fun createUI(superhero: SuperheroDetails) {
         Picasso.get().load(superhero.image.url).into(binding.ivSuperhero)
         binding.tvSuperHeroName.text = superhero.name
         prepareStats(superhero.powerstats)
@@ -78,11 +67,5 @@ class DetailSuperheroActivity : AppCompatActivity() {
         return TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, px, resources.displayMetrics).roundToInt()
     }
 
-    private fun getRetrofit(): Retrofit {
-        return Retrofit
-            .Builder()
-            .baseUrl("https://superheroapi.com/")
-            .addConverterFactory(GsonConverterFactory.create())
-            .build()
-    }
+
 }

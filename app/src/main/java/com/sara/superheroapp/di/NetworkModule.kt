@@ -1,5 +1,6 @@
 package com.sara.superheroapp.di
 
+import com.sara.superheroapp.data.network.ApiService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -20,6 +21,12 @@ object NetworkModule {
             .baseUrl("https://superheroapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
+    }
+
+    @Singleton
+    @Provides
+    fun provideSuperheroApiClient(retrofit: Retrofit): ApiService {
+        return retrofit.create(ApiService::class.java)
     }
 
 }
