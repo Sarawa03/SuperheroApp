@@ -2,6 +2,7 @@ package com.sara.superheroapp.domain.model
 
 import com.google.gson.annotations.SerializedName
 import com.sara.superheroapp.data.model.SuperheroDataResponse
+import com.sara.superheroapp.data.model.SuperheroIdDataResponse
 
 data class Superhero(
     val response: String,
@@ -20,3 +21,4 @@ data class SuperheroImage(
 )
 
 fun SuperheroDataResponse.toDomain() = Superhero(response, superheroes)
+fun SuperheroIdDataResponse.toDomain() = SuperheroItem(id=id, name=name, image=image, true)

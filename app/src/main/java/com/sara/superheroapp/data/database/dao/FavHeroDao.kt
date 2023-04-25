@@ -11,12 +11,15 @@ import com.sara.superheroapp.data.database.entities.FavHeroEntity
 interface FavHeroDao {
 
     @Query("SELECT * FROM favhero_table")
-    suspend fun getAllFavSuperheroes(): List<FavHeroEntity>
+    suspend fun getAllFavSuperheroes(): List<FavHeroEntity>?
 
-    @Insert(onConflict = OnConflictStrategy.ABORT)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun insertFavSuperhero(favSuperheroId: FavHeroEntity)
 
     @Query("DELETE FROM favhero_table WHERE idhero = :favSuperheroId")
     suspend fun deleteFavSuperhero(favSuperheroId: String)
+
+    @Query("DELETE FROM favhero_table")
+    suspend fun deleteAllFav()
 
 }

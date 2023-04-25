@@ -25,5 +25,4 @@ object RoomModule {
     @Provides
     fun provideFavSuperheroDao(database: FavHeroDatabase) = database.getFavHeroDao()
 
-
 }

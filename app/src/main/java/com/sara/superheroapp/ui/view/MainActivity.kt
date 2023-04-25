@@ -43,8 +43,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initUi() {
 
-        //binding.rvSuperhero.favIcon
-
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
 
             override fun onQueryTextSubmit(query: String?): Boolean {//Cuando pulsamos en buscar, la lupa
@@ -59,9 +57,16 @@ class MainActivity : AppCompatActivity() {
                 return false
             }
         })
+
+        binding.btnFavs.setOnClickListener{
+            val intent = Intent(this, FavoritesActivity::class.java)
+            startActivity(intent)
+
+        }
+
         adapter = SuperheroAdapter (onItemSelected = {navigateToDetail(it)}, addFavHero = {addFavToDatabase(it)}, unfavHero = {unfavHero(it)})
-        binding.rvSuperhero.setHasFixedSize(true)
-        binding.rvSuperhero.layoutManager = LinearLayoutManager(this)
+        binding.rvSuperhero.setHasFixedSize(true)//TODO
+        binding.rvSuperhero.layoutManager = LinearLayoutManager(this)//TODO
         binding.rvSuperhero.adapter = adapter
     }
 
